@@ -9,45 +9,45 @@
 
 import random
 
-def userGuess():
-    generated = []
-    while len(generated) < 3:
-        random_num = random.randint(0, 9)
-        generated.append(random_num)
+def lottery():
+    randomGenNum = []
+    while len(randomGenNum) < 3:
+        randomNum = random.randint(0, 9)
+        randomGenNum.append(randomNum)
     
-    guess_times = 0
-    guessed_numbers = []
+    guessCount = 0
+    userNumbers = []
     print('this is a game, guess 3 numbers between 0-9')
-    while guess_times < 3:
+    while guessCount < 3:
         num = int(input('enter a number :'))
-        guessed_numbers.append(num)
-        guess_times += 1
+        userNumbers.append(num)
+        guessCount += 1
 
-    correct_guess = []
-    for num in guessed_numbers:
-        if num in generated:
-            correct_guess.append(num)
-    return correct_guess
+    matchedGuess = []
+    for num in userNumbers:
+        if num in randomGenNum:
+            matchedGuess.append(num)
+    return matchedGuess
 
 
 def check(correct_guess):
-    num_correct = int(len(correct_guess))
-    if num_correct < 3:
+    numMatch = int(len(correct_guess))
+    if numMatch < 3:
         return False
     else:
         return True
 
-def cont():
-    yahno = input('Try again? y/n: ')
-    if yahno == 'y':
+def rePlay():
+    retry = input('Try again? y/n: ')
+    if retry == 'y':
         return True
     else:
         exit
 
 def retry():
-    while cont() is True:
-        cg = userGuess()
-        if check(cg) is True:
+    while rePlay() is True:
+        matchedGuess = lottery()
+        if check(matchedGuess) is True:
             print('Winner')
         else:
             print('you loss')
@@ -56,12 +56,12 @@ def retry():
         exit
 
 def main():
-    cg = userGuess()
-    if check(cg) is True:
+    matchedGuess = lottery()
+    if check(matchedGuess) is True:
         print('Winner')
     else:
         print('you loss')
-        retry()
+        rePlay()
 
 main()
 
