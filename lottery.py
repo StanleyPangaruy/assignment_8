@@ -7,63 +7,79 @@
 # If the user enter “y” the user will play again
 # if “n” the program will exit
 
+#imports the random module to use certain methods
 import random
 
-def lottery():
-    randomGenNum = []
-    while len(randomGenNum) < 3:
+def lotteryDraw():
+    randomGenNum = [] 
+    for num in range(0,3):
         randomNum = random.randint(0, 9)
-        randomGenNum.append(randomNum)
+        while randomNum in randomGenNum: #each random number should be unique
+            randomNum = random.randint(0, 9) #generates the random numbers
+        randomGenNum.append(randomNum) #attach the random numbers to the list
     
-    guessCount = 0
+    #asks for the user inputs
+    guessCount = 0  
     userNumbers = []
-    print('this is a game, guess 3 numbers between 0-9')
     while guessCount < 3:
-        num = int(input('enter a number :'))
-        userNumbers.append(num)
+        num = int(input())
+        userNumbers.append(num) #attach the user-entered numbers to the list
         guessCount += 1
 
+    #checks if the user entered data are similar to the randomly generated ones
     matchedGuess = []
     for num in userNumbers:
-        if num in randomGenNum:
+        if num in randomGenNum: 
             matchedGuess.append(num)
-    return matchedGuess
+    return matchedGuess, randomGenNum
 
 
-def check(correct_guess):
-    numMatch = int(len(correct_guess))
+def check(mGuess):
+    #checks if the length of the list is three
+    numMatch = int(len(mGuess))
     if numMatch < 3:
         return False
     else:
         return True
 
-def rePlay():
-    retry = input('Try again? y/n: ')
-    if retry == 'y':
+def askPlay():
+    #asks the user if they want to play again
+    print("Now that you've eliminated that unlucky draw,")
+    retry = input('Do you want to play again? (y/n) ')
+    print('--------------------------------------------')
+    if retry[0] == 'y': 
         return True
-    else:
+    elif retry[0] == 'n':
         exit
 
 def retry():
-    while rePlay() is True:
-        matchedGuess = lottery()
+    #executes when the user wants to play again
+    while askPlay() is True:
+        print('Enter your 3 lucky numbers from 0 to 9')
+        matchedGuess, randomGenNum = lotteryDraw()
         if check(matchedGuess) is True:
-            print('Winner')
+            print('You Won!')
+            print('--------------------------------------------')
         else:
-            print('you loss')
+            print(f'You loss! Winning number is {randomGenNum[0]}, {randomGenNum[1]} and {randomGenNum[2]}.')
+            print('--------------------------------------------')
             continue
     else:
+        print('You got this next time!')
         exit
 
 def main():
-    matchedGuess = lottery()
+    print('--------------------------------------------')
+    print('LOTTERY')
+    print('Today is your lucky day!')
+    print('Enter your 3 lucky numbers from 0 to 9: ')
+    matchedGuess, randomGenNum = lotteryDraw()
     if check(matchedGuess) is True:
-        print('Winner')
+        print('You Won!')
+        print('--------------------------------------------')
     else:
-        print('you loss')
-        rePlay()
+        print(f'You lose! Winning numbers are {randomGenNum[0]}, {randomGenNum[1]} and {randomGenNum[2]}.')
+        print('--------------------------------------------')
+        retry()
 
 main()
-
-
-
