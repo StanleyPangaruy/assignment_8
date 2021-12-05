@@ -32,10 +32,10 @@ def guesser():
 
     #displays your number of guesses after guessing the correct number.
     if randomNum == guessNum:
-        
-        print(f"""---------------------------------------------------------
-Congratulations! You guessed my number in only {guessCount} guesses.
----------------------------------------------------------""")
+
+        print(f"""---------------------------------------------------
+Nice! You figured out my number in only {guessCount} guesses.
+---------------------------------------------------""")
 
 def main():
 
