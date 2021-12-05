@@ -7,17 +7,44 @@
 
 from random import randint
 
+def guesser():
 
-rng = randint(0,100)
-number = int(input('Guess the number: '))
-while number != rng:
-    if number > rng:
-        print('Greater than')
-        number = int(input('Guess the number: '))
-    elif number < rng:
-        print('Less than')
-        number = int(input('Guess the number: '))
-    else:
-        break
-if rng == number:
-    print('You got it')
+    randomNum = randint(0,100) #randomnly generates the number to be guessed from 0 to 100
+    guessNum = int(input()) #asks for the user input to guess to the number
+    guessCount = 1 #current guesscount to account for the correct guess
+
+    #loops only when user's guess is not equal the randomly generated number
+    while guessNum != randomNum: 
+        if guessNum > randomNum: #guess is higher than the random number
+            print('Your guess is too high. Go lower!')
+            print('Take another guess.')
+            guessNum = int(input())
+            guessCount += 1 #adds to the guess count for every guess
+
+        elif guessNum < randomNum: #guess is lower than the random number
+            print('Your guess is too low. Go higher!')
+            print('Guess again!')
+            guessNum = int(input())
+            guessCount += 1 #adds to the guess count for every guess
+
+        else:
+            break #exits the loop if none satisfies
+
+    #displays your number of guesses after guessing the correct number.
+    if randomNum == guessNum:
+        
+        print(f"""---------------------------------------------------------
+Congratulations! You guessed my number in only {guessCount} guesses.
+---------------------------------------------------------""")
+
+def main():
+
+    print("""--------------------------------
+I have a number from 0 to 100.
+What is my number?
+--------------------------------""")
+
+    guesser()
+
+main()
+
