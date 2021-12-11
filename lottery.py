@@ -61,7 +61,7 @@ def retry():
             print('You Won!')
             print('--------------------------------------------')
         else:
-            print(f'You loss! Winning number is {randomGenNum[0]}, {randomGenNum[1]} and {randomGenNum[2]}.')
+            print(f'You lose! Winning number is {randomGenNum[0]}, {randomGenNum[1]} and {randomGenNum[2]}.')
             print('--------------------------------------------')
             continue
     else:
@@ -72,7 +72,7 @@ def main():
     print('--------------------------------------------')
     print('LOTTERY')
     print('Today is your lucky day!')
-    print('Enter your 3 lucky numbers from 0 to 9: ')
+    print('Enter your 3 unique lucky numbers from 0 to 9: ')
     matchedGuess, randomGenNum = lotteryDraw()
     if check(matchedGuess) is True:
         print('You Won!')
